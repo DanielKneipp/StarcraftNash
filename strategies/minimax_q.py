@@ -3,6 +3,7 @@ import random
 import scorechart
 from config import Config
 
+
 class MiniMaxQ(StrategyBase):
 
     MINIMAXQ_ALPHA_TAG = 'alpha'
@@ -13,7 +14,7 @@ class MiniMaxQ(StrategyBase):
         config = Config.get_instance()
 
         if config_name is None:
-            raise Exception('Fictitious Play must have a configuration specified at the initialization time')
+            raise Exception('MinimaxQ must have a configuration specified at initialization')
 
         self.set_config_name(config_name)
 
