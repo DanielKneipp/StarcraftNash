@@ -1,6 +1,8 @@
-from strategy_base import StrategyBase
 import random
-import scorechart
+import numpy as np
+from collections import OrderedDict
+import nash
+from strategy_base import StrategyBase
 from config import Config
 
 class MiniMaxQ(StrategyBase):
@@ -19,9 +21,9 @@ class MiniMaxQ(StrategyBase):
 
         # set counters
         # Note: self.bot_list can't be used here because it isn't initialized from the config file yet
-        bots = config.get_bots()
-        self.q_matrix = {bot: 0 for bot in bots}
-        self.q_matrix = {bot: self.q_matrix.copy() for bot in bots}
+        bots = config.get_bots().keys()
+        self.q_matrix = OrderedDict({bot: 0 for bot in bots})
+        self.q_matrix = OrderedDict({bot: self.q_matrix.copy() for bot in bots})
 
         # Set alpha
         if self.MINIMAXQ_ALPHA_TAG in config.get(self.config_name):
@@ -31,7 +33,24 @@ class MiniMaxQ(StrategyBase):
 
     def get_next_bot(self):
         self.update_qmatrix()
-        return self.get_choice_top_vals()        
+        return self.nash_choice()
+
+    def nash_choice(self):
+        # Use the ordered bots list
+        bots = self.q_matrix.keys()
+        nash_eq = self.calc_nasheq(self.q_matrix)
+        if nash_eq is None:
+            return self.get_choice_top_vals()
+        else:
+            return np.random.choice(bots, 1, p=nash_eq)[0]
+
+    def calc_nasheq(self, qmatrix):
+        mat = np.array([v.values() for k, v in qmatrix.iteritems()])
+        game = nash.Game(mat)
+        try:
+            return list(game.support_enumeration())[0][0]
+        except IndexError:
+            return None
 
     def update_qmatrix(self):
         # finds opponent's last choice

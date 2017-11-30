@@ -18,4 +18,4 @@ g = nash.Game(game_matrix, game_matrix_neg)
 print g
 
 eq = g.support_enumeration()
-print list(eq)
+print list(eq)[0][0]

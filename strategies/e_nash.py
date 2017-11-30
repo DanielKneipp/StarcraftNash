@@ -1,5 +1,5 @@
 from strategy_base import StrategyBase
-import nash
+import nash_player
 import frequentist
 import random
 from config import Config
@@ -26,7 +26,7 @@ class EpsilonNash(StrategyBase):
         self.epsilon = Config.get_instance().enash_exploitation
 
         # Nash equilibrium strategy
-        self.nash = nash.Nash('Nash inside e-Nash')
+        self.nash = nash_player.Nash('Nash inside e-Nash')
 
         # exploitation strategy
         self.exploitation = frequentist.Frequentist('Frequentist inside e-Nash')
