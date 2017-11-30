@@ -1,5 +1,5 @@
 import sys
-import nash
+import nash_player
 import random_uniform
 import frequentist
 import reply_last
@@ -21,7 +21,7 @@ class StrategySelector:
 
     strategies = {
         'unique': unique.Unique,                            # choose always the same option
-        'nash': nash.Nash,                                  # plays nash equilibrium
+        'nash': nash_player.Nash,                           # plays nash equilibrium
         'random_uniform': random_uniform.RandomUniform,     # plays uniformly random
         'frequentist': frequentist.Frequentist,             # responds to most frequent choice (uses score chart)
         'freqhist': frequentist.HistoryFrequentist,         # responds to most frequent choice (uses history)
