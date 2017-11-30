@@ -30,6 +30,10 @@ class MiniMaxQ(StrategyBase):
             self.alpha = 0.3
 
     def get_next_bot(self):
+        self.update_qmatrix()
+        return self.get_choice_top_vals()        
+
+    def update_qmatrix(self):
         # finds opponent's last choice
         opponent_choice = self.opponent_choice(-1)
         # Get my past choice
@@ -44,6 +48,7 @@ class MiniMaxQ(StrategyBase):
             q = self.q_matrix[my_past_choice][opponent_choice]
             self.q_matrix[my_past_choice][opponent_choice] += self.alpha * (past_result - q)
 
+    def get_choice_top_vals(self):
         # Get the lines (choices) with highest values
         sums = {choice: sum(d.values()) for choice, d in self.q_matrix.iteritems()}
         max_sums = max(sums.values())
