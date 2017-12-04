@@ -49,7 +49,7 @@
         <output-spreadsheet value="score-chart.xls" />
         <output-intermediate value="intermediate" />
         <random-seed value="1" />
-        <repetitions value="30" />
+        <repetitions value="10" />
         <match-pool-file value="results_demo/fortress1000.txt" />
         <num-matches value="1000" />
         <round-robin value="true" />
