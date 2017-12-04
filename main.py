@@ -118,12 +118,9 @@ class Main:
                 single_result_dict[player_a.get_name()][player_b.get_name()] = a_win_percentage
                 single_result_dict[player_b.get_name()][player_a.get_name()] = b_win_percentage
 
-                # TODO --- begin: print ranking ---
-                
+                # prints the ranking each player has determined
                 self.print_ranking(player_a, player_b)
                 
-                # TODO --- end: print ranking
-
             print  # adds newline
             self.result_list.append(single_result_dict)
 
