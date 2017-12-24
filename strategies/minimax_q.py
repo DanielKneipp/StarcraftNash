@@ -1,9 +1,21 @@
 import random
 import numpy as np
 from collections import OrderedDict
+from os import path, makedirs
+import pickle
+import string
+import time
+import copy
 import nash
+import scipy
 from strategy_base import StrategyBase
 from config import Config
+
+def random_string(length, num_only=False):
+    pool = string.digits
+    if not num_only:
+        pool += string.letters
+    return ''.join(random.choice(pool) for i in xrange(length))
 
 class MiniMaxQ(StrategyBase):
 
@@ -12,7 +24,10 @@ class MiniMaxQ(StrategyBase):
     def __init__(self, strategy_name, config_name):
         super(MiniMaxQ, self).__init__(strategy_name)
 
-        config = Config.get_instance()
+        self.q_matrix_list_to_dump = []
+        self.hash_str = str(int(round(time.time() * 1000)))
+
+        self.config = Config.get_instance()
 
         if config_name is None:
             raise Exception('Fictitious Play must have a configuration specified at the initialization time')
@@ -21,19 +36,27 @@ class MiniMaxQ(StrategyBase):
 
         # set counters
         # Note: self.bot_list can't be used here because it isn't initialized from the config file yet
-        bots = config.get_bots().keys()
-        self.q_matrix = OrderedDict({bot: 0 for bot in bots})
+        bots = self.config.get_bots().keys()
+        self.q_matrix = OrderedDict({bot: 1 for bot in bots})
         self.q_matrix = OrderedDict({bot: self.q_matrix.copy() for bot in bots})
 
         # Set alpha
-        if self.MINIMAXQ_ALPHA_TAG in config.get(self.config_name):
-            self.alpha = config.get(self.config_name)[self.MINIMAXQ_ALPHA_TAG]
+        if self.MINIMAXQ_ALPHA_TAG in self.config.get(self.config_name):
+            self.alpha = self.config.get(self.config_name)[self.MINIMAXQ_ALPHA_TAG]
         else:
             self.alpha = 0.3
 
     def get_next_bot(self):
         self.update_qmatrix()
-        return self.nash_choice()
+
+        choice = self.nash_choice()
+
+        # If it is the last round, save the qmatrix
+        if self.history_length() == (self.config.data[Config.NUM_MATCHES] - 1):
+            self.save_qmatrix_str('qmatrix_info/last_qmatrix_' + self.hash_str + '.txt')
+            self.dump_qmatrices('qmatrix_info/nash_problematic_qmatrices_' + self.hash_str + '.pkl')
+
+        return choice
 
     def nash_choice(self):
         # Use the ordered bots list
@@ -47,10 +70,54 @@ class MiniMaxQ(StrategyBase):
     def calc_nasheq(self, qmatrix):
         mat = np.array([v.values() for k, v in qmatrix.iteritems()])
         game = nash.Game(mat)
-        try:
-            return list(game.support_enumeration())[0][0]
-        except IndexError:
+
+        def solve_support(game, errf):
+            try:
+                return np.absolute(list(game.support_enumeration())[0][0].round(9))
+            except IndexError as e:
+                return errf(game, e)
+
+        def solve_vertex(game, errf1, errf2):
+            try:
+                return np.absolute(list(game.vertex_enumeration())[0][0].round(9))
+            except scipy.spatial.qhull.QhullError as e:
+                return errf1(game, e)
+            except IndexError as e:
+                return errf2(game, e)
+
+        def solve_lemke(game, errf1, errf2, errf3, errf4):
+            try:
+                s = np.absolute(list(game.lemke_howson(0))[0].round(9))
+            except Exception as e:
+                return errf4(game, e)
+            if np.NaN in s:
+                return errf1(game, ValueError('There is a NaN on the equilibria'))
+            if all(i == 0 for i in s):
+                return errf2(game, ValueError('All equilibria values are 0'))
+            if len(qmatrix) != len(s):
+                return errf3(game, ValueError('Number of equilibria value don\'t match with qmatrix size'))
+            return s
+
+        def mark_qmatrix_to_dump(game, e):
+            self.q_matrix_list_to_dump.append(copy.deepcopy(qmatrix))
             return None
+
+        # solve_support_prepared = lambda game, e: solve_support(game, mark_qmatrix_to_dump)
+        solve_vertex_prepared = lambda game, e: solve_vertex(
+            game, 
+            mark_qmatrix_to_dump, 
+            mark_qmatrix_to_dump
+        )
+        solve_lemke_prepared = lambda game, e: solve_lemke(
+            game, 
+            solve_vertex_prepared, 
+            solve_vertex_prepared, 
+            solve_vertex_prepared,
+            solve_vertex_prepared
+        )
+
+        # return solve_vertex(game, solve_support_prepared, solve_support_prepared)
+        return solve_support(game, solve_lemke_prepared)
 
     def update_qmatrix(self):
         # finds opponent's last choice
@@ -75,3 +142,38 @@ class MiniMaxQ(StrategyBase):
 
         response = random.choice(possible_choices)
         return response
+
+    def save_qmatrix_str(self, filename):
+        # Build the string, starting with the keys, then
+        # add the values
+        string = ''
+        for k, _ in self.q_matrix.iteritems():
+            string += str(k) + ';'
+        string = string[:-1]
+
+        for _, vs in self.q_matrix.iteritems():
+            string += '\n'
+            for _, v in vs.iteritems():
+                string += str(v) + ';'
+            string = string[:-1]
+        
+        # Creates the path if it doesn't exists
+        filename = path.abspath(filename)
+        filepath = path.dirname(filename)
+        if not path.isdir(filepath):
+            makedirs(filepath)
+
+        # Dump the qmatrix
+        with open(filename, 'w') as f:
+            f.write(string)
+
+    def dump_qmatrices(self, filename):
+        # Creates the path if it doesn't exists
+        filename = path.abspath(filename)
+        filepath = path.dirname(filename)
+        if not path.isdir(filepath):
+            makedirs(filepath)
+
+        # Dump the qmatrix
+        with open(filename, 'wb') as f:
+            pickle.dump(self.q_matrix_list_to_dump, f, pickle.HIGHEST_PROTOCOL)
