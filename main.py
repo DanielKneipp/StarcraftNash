@@ -2,6 +2,8 @@ import os
 import csv
 import sys
 import time
+from datetime import timedelta
+from datetime import datetime
 import config
 import random
 import argparse
@@ -721,4 +723,7 @@ class Main:
 
 
 if __name__ == '__main__':
+    start_time = datetime.now()
     Main()
+    end_time = datetime.now()
+    print('Duration: {}'.format(end_time - start_time))
