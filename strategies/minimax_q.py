@@ -11,11 +11,13 @@ import scipy
 from strategy_base import StrategyBase
 from config import Config
 
+
 def random_string(length, num_only=False):
     pool = string.digits
     if not num_only:
         pool += string.letters
     return ''.join(random.choice(pool) for i in xrange(length))
+
 
 class MiniMaxQ(StrategyBase):
 
@@ -30,7 +32,7 @@ class MiniMaxQ(StrategyBase):
         self.config = Config.get_instance()
 
         if config_name is None:
-            raise Exception('Fictitious Play must have a configuration specified at the initialization time')
+            raise Exception('MinimaxQ must have a configuration specified at initialization')
 
         self.set_config_name(config_name)
 

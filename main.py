@@ -1,3 +1,5 @@
+#!/usr/bin/python2.7
+# -*- coding: utf-8 -*-
 import os
 import csv
 import sys
@@ -118,10 +120,9 @@ class Main:
                 single_result_dict[player_a.get_name()][player_b.get_name()] = a_win_percentage
                 single_result_dict[player_b.get_name()][player_a.get_name()] = b_win_percentage
 
-                # TODO --- begin: print ranking ---
-                # >>> print code comes here
-                # TODO --- end: print ranking
-
+                # prints the ranking each player has determined
+                self.print_ranking(player_a, player_b)
+                
             print  # adds newline
             self.result_list.append(single_result_dict)
 
@@ -156,6 +157,31 @@ class Main:
             new_aa = StrategySelector.recreate_strategy(aa)
             new_bb = StrategySelector.recreate_strategy(bb)
             self.game_matches[i] = (new_aa, new_bb)
+    
+    def print_ranking(self, player_a, player_b):
+        flag = 1
+        
+        #select e-greedy
+        if player_a.get_name() == "e-Greedy":
+            e_greedy =  player_a
+        
+        elif player_b.get_name() == "e-Greedy":
+            e_greedy = player_b
+        
+        else:
+            flag = 0
+        
+        #e-greedy selected
+        if flag == 1:
+            #ranking() function
+            score = e_greedy.calculate_scores()
+            
+            # constructs a list of tuples from the dict
+            ranking = [(choice, score) for choice, score in score.iteritems()]
+            
+            #prints the sorted list
+            print "\nE-Greedy ranking values:"
+            print sorted(ranking, key=lambda x: x[1], reverse=True)
 
     @staticmethod
     def output_overall_match_result(out_file, overall_players_choices, num_matches, num_repetitions):

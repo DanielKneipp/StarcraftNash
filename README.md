@@ -8,7 +8,13 @@ StarcraftNash project runs a round-robin tournament between **strategy selection
 
 Please [read the wiki](https://github.com/h3ct0r/StarcraftNash/wiki/) for a detailed discussion on how the software works and how you can implement and test your own strategy selection methods.
 
-###Example
+### Dependencies
+
+The project depends on [NashPy](https://github.com/drvinceknight/Nashpy). To install it, run:
+
+`sudo -H pip2 install nashpy`
+
+### Example
 (assuming you have cloned the project and are located at project's root directory)
 
 Run a tournament with 500 matches between Nash and Random Uniform methods, useing a default [pool of matches](https://github.com/h3ct0r/StarcraftNash/wiki/Pool-of-matches) and parameters.
