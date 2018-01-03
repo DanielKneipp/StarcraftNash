@@ -11,9 +11,9 @@ import random
 import argparse
 import itertools
 import result_parser
-import strategies.agent_base
+import agents.agent_base
 import matplotlib.pyplot as plt
-from strategies.agent_selector import AgentSelector
+from agents.agent_selector import AgentSelector
 
 __author__ = 'Hector Azpurua'
 
@@ -41,7 +41,7 @@ class Main:
         self.bot_match_list = self.result_parser.get_match_list()
 
         # sets possible players' selections from config object
-        strategies.agent_base.AgentBase.bot_list = self.config.bots.keys()
+        agents.agent_base.AgentBase.bot_list = self.config.bots.keys()
 
         self.result_list = []
 
