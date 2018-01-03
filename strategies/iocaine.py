@@ -4,7 +4,7 @@
 # See http://ofb.net/~egnor/iocaine.html
 
 import random
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from config import Config
 import scorechart
 import copy
@@ -132,7 +132,7 @@ class Predictor:
 ages = [1000, 100, 10, 5, 2, 1]
 
 
-class Iocaine(StrategyBase):
+class Iocaine(AgentBase):
     def __init__(self, strategy_name):
         """Build second-guessers for 50 strategies: 36 history-based strategies,
            12 simple frequency-based strategies, the constant-move strategy, and

@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from config import Config
 import scorechart
 import random
@@ -6,7 +6,7 @@ import random
 __author__ = 'Daniel Kneipp'
 
 
-class FictitiousPlay(StrategyBase):
+class FictitiousPlay(AgentBase):
 
     STOCHASTIC_TAG = "be-stochastic"
 

@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 import nash_player
 import frequentist
 import random
@@ -7,7 +7,7 @@ from config import Config
 __author__ = 'Anderson Tavares'
 
 
-class EpsilonNash(StrategyBase):
+class EpsilonNash(AgentBase):
 
     """
     Returns Nash-equilibria with probability (1-epsilon);
@@ -21,7 +21,7 @@ class EpsilonNash(StrategyBase):
         :param epsilon: probability of EXPLOITATION
         :return:
         """
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
         # probability of exploitation (different of e-greedy which is exploration)
         self.epsilon = Config.get_instance().enash_exploitation
 

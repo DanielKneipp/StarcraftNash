@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 import random
 import math
 from config import Config
@@ -24,7 +24,7 @@ def categorical_draw(probabilities):
     return probabilities.keys()[-1]  # I think code should not reach here
 
 
-class Exp3(StrategyBase):
+class Exp3(AgentBase):
     """
     Use the Exp3 method for strategy selection.
     The method is from the paper:
@@ -39,7 +39,7 @@ class Exp3(StrategyBase):
         Initializes Exp3
         """
 
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
 
         # overrides bot_list with bandit choices
         self.bot_list = Config.get_instance().get_bandit_choices()

@@ -1,16 +1,16 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 import random_uniform
 
 __author__ = 'Hector Azpurua'
 
 
-class Unique(StrategyBase):
+class Unique(AgentBase):
     """
     Selects the same strategy every time
     """
 
     def __init__(self, strategy_name):
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
         # self.result_list = []
         # self.match_list = []
         # self.s_id = None

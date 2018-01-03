@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from config import Config
 import random
 import scorechart
@@ -6,9 +6,9 @@ import scorechart
 __author__ = 'Barbara Lopes'
 
 
-class NoRegret(StrategyBase):
+class NoRegret(AgentBase):
     def __init__(self, strategy_name):
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
 
         self.result_list = []
         self.match_list = []

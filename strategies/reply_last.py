@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from config import Config
 import scorechart
 import random
@@ -6,14 +6,14 @@ import random
 __author__ = 'Anderson Tavares'
 
 
-class PriorKnowledgeReplyLast(StrategyBase):
+class PriorKnowledgeReplyLast(AgentBase):
     """
     Selects the bot that would beat last opponent choice, querying a score chart
     previously computed
     """
 
     def __init__(self, strategy_name):
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
 
         # loads score chart from file
         self.score_chart = scorechart.from_file(
@@ -34,13 +34,13 @@ class PriorKnowledgeReplyLast(StrategyBase):
         return min(self.score_chart[opponent_choice], key=self.score_chart[opponent_choice].get)
 
 
-class NoPriorReplyLast(StrategyBase):
+class NoPriorReplyLast(AgentBase):
     """
     Selects the bot that won most matches against last opponent choice
     """
 
     def __init__(self, strategy_name):
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
         self.result_list = []
         self.match_list = []
         self.s_id = None

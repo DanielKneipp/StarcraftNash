@@ -8,7 +8,7 @@ import time
 import copy
 import nash
 import scipy
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from config import Config
 
 
@@ -19,7 +19,7 @@ def random_string(length, num_only=False):
     return ''.join(random.choice(pool) for i in xrange(length))
 
 
-class MiniMaxQ(StrategyBase):
+class MiniMaxQ(AgentBase):
 
     MINIMAXQ_ALPHA_TAG = 'alpha'
 

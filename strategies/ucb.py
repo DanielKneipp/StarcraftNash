@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from config import Config
 from math import log, sqrt
 from sys import maxint
@@ -7,7 +7,7 @@ from sys import stdout
 __author__ = 'Anderson'
 
 
-class UCB1(StrategyBase):
+class UCB1(AgentBase):
     """
     Use the UCB1 method for strategy selection:
     Chooses the option with highest average value + upper confidence bound of
@@ -21,7 +21,7 @@ class UCB1(StrategyBase):
         Initializes UCB1 strategy selection method
         """
 
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
         self.formula = self.ucb1
 
         # overrides bot_list with bandit choices

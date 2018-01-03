@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 import sys
 import random
 import config
@@ -6,7 +6,7 @@ import config
 __author__ = 'Hector Azpurua'
 
 
-class Nash(StrategyBase):
+class Nash(AgentBase):
 
     def __init__(self, strategy_name):
         self.strategy_name = strategy_name

@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 __author__ = 'Hector Azpurua'
 
 
-class StrategyBase(object):
+class AgentBase(object):
     __metaclass__ = ABCMeta
 
     # codes for possible match results

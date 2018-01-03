@@ -1,11 +1,11 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 import random
 from config import Config
 
 __author__ = 'Hector Azpurua'  # refactored by Anderson
 
 
-class EGreedy(StrategyBase):
+class EGreedy(AgentBase):
     """
     Use the epsilon-greedy method for strategy selection:
     Chooses a random strategy (exploration) with probability epsilon
@@ -17,7 +17,7 @@ class EGreedy(StrategyBase):
         Initializes epsilon-greedy strategy selection method
         """
 
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
         self.result_list = []
         self.match_list = []
         self.s_id = None

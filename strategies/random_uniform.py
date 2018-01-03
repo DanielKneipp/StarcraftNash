@@ -1,10 +1,10 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 import random
 
 __author__ = 'Hector Azpurua'
 
 
-class RandomUniform(StrategyBase):
+class RandomUniform(AgentBase):
     """
     Select a random strategy
     """

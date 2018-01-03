@@ -1,4 +1,4 @@
-from strategy_base import StrategyBase
+from agent_base import AgentBase
 from collections import Counter
 from config import Config
 import scorechart
@@ -7,7 +7,7 @@ import random
 __author__ = 'Hector Azpurua'   # refactor by Anderson
 
 
-class Frequentist(StrategyBase):
+class Frequentist(AgentBase):
     """
     Tries to beat opponent by selecting the strategy that
     counters its most frequent choice.
@@ -15,7 +15,7 @@ class Frequentist(StrategyBase):
     """
 
     def __init__(self, strategy_name):
-        StrategyBase.__init__(self, strategy_name)
+        AgentBase.__init__(self, strategy_name)
 
         # uses score chart to determine best response
         self.score_chart = scorechart.from_file(
