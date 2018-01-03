@@ -17,9 +17,9 @@ import minimax_q
 __author__ = 'Hector Azpurua'
 
 
-class StrategySelector:
+class AgentSelector:
 
-    strategies = {
+    agents = {
         'unique': unique.Unique,                            # choose always the same option
         'nash': nash_player.Nash,                           # plays nash equilibrium
         'random_uniform': random_uniform.RandomUniform,     # plays uniformly random
@@ -46,8 +46,8 @@ class StrategySelector:
 
     def update_strategies(self, new_strat):
         for elem in new_strat.keys():
-            if elem not in self.strategies:
-                self.strategies[elem] = None
+            if elem not in self.agents:
+                self.agents[elem] = None
 
     def set_unique_choices(self, choices):
         self.choices = choices
@@ -64,17 +64,17 @@ class StrategySelector:
         #    print >> sys.stderr, 'Strategy not in player list or in bot list:', strategy
         #    return None
 
-        if strategy.player_type not in self.strategies:
+        if strategy.player_type not in self.agents:
             raise Exception('Strategy not in player list or in bot list: ' + str(strategy))
 
         if strategy.config_tag_name is not None:
             try:
-                s = self.strategies[strategy.player_type](strategy.player_name, strategy.config_tag_name)
+                s = self.agents[strategy.player_type](strategy.player_name, strategy.config_tag_name)
             except TypeError:
-                s = self.strategies[strategy.player_type](strategy.player_name)
+                s = self.agents[strategy.player_type](strategy.player_name)
                 s.set_config_name(strategy.config_tag_name)
         else:
-            s = self.strategies[strategy.player_type](strategy.player_name)
+            s = self.agents[strategy.player_type](strategy.player_name)
 
         return s
 

@@ -13,7 +13,7 @@ import itertools
 import result_parser
 import strategies.agent_base
 import matplotlib.pyplot as plt
-from strategies.strategy_selector import StrategySelector
+from strategies.agent_selector import AgentSelector
 
 __author__ = 'Hector Azpurua'
 
@@ -28,7 +28,7 @@ class Main:
     def __init__(self):
         self.result_parser = None
         self.config = config.Config.get_instance()
-        self.strategy_selector = StrategySelector()
+        self.strategy_selector = AgentSelector()
         self.usr_input = self.get_arg()
         self.game_matches = []  # matches between strategy selectors (list of tuples)
         # self.config.round_robin = False          # defines matches between all strategy selectors
@@ -154,8 +154,8 @@ class Main:
         for i, match in enumerate(self.game_matches):
             aa, bb = match
 
-            new_aa = StrategySelector.recreate_strategy(aa)
-            new_bb = StrategySelector.recreate_strategy(bb)
+            new_aa = AgentSelector.recreate_strategy(aa)
+            new_bb = AgentSelector.recreate_strategy(bb)
             self.game_matches[i] = (new_aa, new_bb)
     
     def print_ranking(self, player_a, player_b):
@@ -433,7 +433,7 @@ class Main:
 
         # plays round-robin if configured for that and players were not explicitly passed via command line
         if self.config.round_robin and (self.usr_input['player_a'] is None and self.usr_input['player_b'] is None):
-            players = StrategySelector.strategies.keys()  # players are the strategy (bot) selectors
+            players = AgentSelector.agents.keys()  # players are the strategy (bot) selectors
 
             if self.config.get_is_config_updated():
                 players += self.config.get_bots()
@@ -461,7 +461,7 @@ class Main:
                                      'of possible parameters and combinations'
                 sys.exit(1)
 
-            all_players = StrategySelector.strategies.keys() + self.result_parser.get_unique_opponents()
+            all_players = AgentSelector.agents.keys() + self.result_parser.get_unique_opponents()
             if self.usr_input['player_a'] not in all_players or self.usr_input['player_b'] not in all_players:
                 print >> sys.stderr, \
                     'Strategy for opponent A or B are invalid, the valid strategies are', all_players
