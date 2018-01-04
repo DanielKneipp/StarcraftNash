@@ -10,6 +10,11 @@ import scipy.stats
 import matplotlib.pyplot as plt
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
+'''
+This scripts requires statsmodels, you can install it via PIP:
+# pip2 install statsmodels
+'''
+
 __author__ = 'Hector Azpurua'
 
 plt.rcParams['text.usetex'] = True #Let TeX do the typsetting
@@ -258,13 +263,14 @@ def plot_ci(strategies_ci, language='en'):
     plt.show()
     pass
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Plots the mean wins of bots given a folder with the win table in CSV files'
     )
 
     parser.add_argument(
-        '-i', '--input', help='Folder to search the CSV files', required=True
+        'input', help='Folder to search the CSV files'
     )
 
     parser.add_argument(
