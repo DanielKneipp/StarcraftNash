@@ -4,13 +4,17 @@
 Defines languages and vocabulary
 """
 #class vocabulary:
-EGREEDY = 'E-greedy'
-ENASH = 'E-Nash'
+#EGREEDY = 'E-greedy'
+#ENASH = 'E-Nash'
+EGREEDY = 'e-Greedy'
+ENASH = 'e-Nash'
 NASH = 'Nash'
-FREQUENTIST = 'Frequentist'
-REPLY_SCORE = 'Reply-score'
+FREQUENTIST = 'Frequentist 1'
+#REPLY_SCORE = 'Reply-score'
+REPLY_SCORE = 'Reply Last'
 XELNAGA = 'Xelnaga'
 MEAN_WIN_PERCENT = 'mean_win_percent'
+MINIMAXQ = 'MiniMaxQ'
 
 english = {
     EGREEDY: r'$\epsilon$-greedy',
@@ -19,6 +23,7 @@ english = {
     NASH: 'Nash',
     REPLY_SCORE: 'Reply last',
     XELNAGA: 'Single choice',
+    MINIMAXQ: 'minimaxQ',
     MEAN_WIN_PERCENT: 'Mean win percent'
 }
 
@@ -29,6 +34,7 @@ portuguese = {
     NASH: 'Nash',
     REPLY_SCORE: r'Rebater \'ultima', #.decode('utf-8'),
     XELNAGA: r'Escolha \'unica', #.decode('utf-8'),
+    MINIMAXQ: 'minimaxQ',
     MEAN_WIN_PERCENT: r'Percentual m\'edio de vit\'orias', #2.decode('utf-8'),
 }
 
