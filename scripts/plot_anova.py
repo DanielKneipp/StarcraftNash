@@ -206,17 +206,6 @@ def plot_ci(strategies_ci, language='en'):
     # additional spaces improve alignment with its respective bar
     for i, v in enumerate(s_keys):
         s_keys[i] = words[v]
-        '''if v == 'E-greedy':
-            s_keys[i] = r'        $\alpha$-greedy'
-        elif v == 'Nash':
-            s_keys[i] = '        Nash'
-        elif v == 'E-Nash':
-            s_keys[i] = r'        $\epsilon$-Nash'
-        elif v == 'Reply-score':
-            s_keys[i] = 'Reply-last'
-        elif v == 'Xelnaga':
-            s_keys[i] = 'Single choice'
-            '''
 
     for v in s_values:
         n.append(v[0])
@@ -240,7 +229,7 @@ def plot_ci(strategies_ci, language='en'):
 
     #plt.yticks(range(0, 101, 10))
     plt.xticks(x, n)
-    ax.set_xticklabels(s_keys, rotation=35)
+    ax.set_xticklabels(s_keys, rotation=35, ha='right')
     plt.subplots_adjust(bottom=0.20)
     #plt.grid(True)
     #plt.gca().yaxis.grid(True)
