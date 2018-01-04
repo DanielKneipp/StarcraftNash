@@ -225,14 +225,18 @@ def plot_ci(strategies_ci, language='en'):
     x = np.arange(len(n))
     fig, ax = plt.subplots()
 
-    #rects1 = plt.bar(x, n, color='#1D73AA', edgecolor='white', yerr=ci,
-    #                 error_kw=dict(ecolor='crimson', lw=2, capsize=5, capthick=2))
+    rects1 = plt.bar(x, n, color='gray', edgecolor='white', yerr=ci, lw=2,
+                     error_kw=dict(ecolor='crimson', lw=1, capsize=5, capthick=1))
 
-    rects1 = plt.bar(x, n, color='white', edgecolor='black', yerr=ci,
-                     error_kw=dict(ecolor='black', lw=2, capsize=5, capthick=2))
+    # rects1 = plt.bar(x, n, color='#1D73AA', edgecolor='white', yerr=ci,
+    #                  error_kw=dict(ecolor='crimson', lw=2, capsize=5, capthick=2))
 
-    #for bar in rects1:
-    #    bar.set_hatch('//')
+    #rects1 = plt.bar(x, n, color='white', edgecolor='black', yerr=ci,
+    #                 error_kw=dict(ecolor='black', lw=2, capsize=5, capthick=2))
+
+    # for bar in rects1:
+    #     print bar
+    #     bar.set_hatch('//')
 
     #plt.yticks(range(0, 101, 10))
     plt.xticks(x, n)
@@ -249,17 +253,13 @@ def plot_ci(strategies_ci, language='en'):
         #label.set_fontname('Arial')
         label.set_fontsize(16)
 
-    #plt.xlabel('Hexagon quantity')
-    #plt.ylabel('Mean win percent')
     plt.ylabel(words[lang.MEAN_WIN_PERCENT], fontsize=18)
-    #plt.title('Hexagons vs percentage of trajectory saved')
-
 
     x0, x1, y0, y1 = plt.axis()
     plt.axis((x0 - 0.2,
-              x1 ,
-              20,
-              y1 ))
+              x1,
+              10,
+              y1 + 10))
     plt.show()
     pass
 
