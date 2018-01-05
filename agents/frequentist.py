@@ -63,9 +63,9 @@ class HistoryFrequentist(Frequentist):
     Queries previous match history to determine best response.
     """
 
-    def __init__(self):
-        Frequentist.__init__(self)
-        self.strategy_name = 'HistoryFreq'
+    def __init__(self, strategy_name):
+        Frequentist.__init__(self, strategy_name)
+        self.strategy_name = strategy_name
 
     def get_next_bot(self):
         """
