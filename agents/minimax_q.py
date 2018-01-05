@@ -67,7 +67,12 @@ class MiniMaxQ(AgentBase):
         if nash_eq is None:
             return self.get_choice_top_vals()
         else:
-            return np.random.choice(bots, 1, p=nash_eq)[0]
+            try:
+                return np.random.choice(bots, 1, p=nash_eq)[0]
+            except ValueError:
+                print "ERROR: probabilities don't add to 1 %s" % nash_eq
+                print "Choosing randomly"
+                return random.choice(bots)
 
     def calc_nasheq(self, qmatrix):
         mat = np.array([v.values() for k, v in qmatrix.iteritems()])
