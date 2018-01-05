@@ -27,24 +27,24 @@
     <players>
         <player type="nash" name="Nash"/>
         <player type="enash" name="e-Nash" />
-        <player type="frequentist" name="Frequentist 1"/>
+        <player type="frequentist" name="Frequentist"/>
         <!-- <player type="frequentist" name="Frequentist 2"/> -->
-        <player type="replyscore" name="Reply Last"/>
+        <player type="replyscore" name="Reply-Last"/>
         <player type="egreedy" name="e-Greedy" />
         <player type='unique' name="Xelnaga" />
         <player type='unique' name="Skynet" />
         <!-- <player type="fictitious" name="Fictitious Nash (Stochastic)" config="fictitious_nash_stochastic"/> -->
         <!-- <player type="fictitious" name="Fictitious Clone (Stochastic)" config="fictitious_clone_stochastic"/> -->
-        <player type="fictitious" name="Fictitious (Stochastic)" config="fictitious_stochastic"/>
+        <player type="fictitious" name="Fictitious(Stoch)" config="fictitious_stochastic"/>
         <!-- <player type="iocaine" name="Iocaine"/> -->
         <player type="minimaxq" name="MiniMaxQ" config="minimaxq"/>
         <!-- <player type="fictitious" name="Fictitious Nash (Deterministic)" config="fictitious_nash_deterministic"/> -->
         <!-- <player type="fictitious" name="Fictitious Clone (Deterministic)" config="fictitious_clone_deterministic"/> -->
-        <player type="fictitious" name="Fictitious (Deterministic)" config="fictitious_deterministic"/>
-        <!-- <player type="noregret" name="No Regret"/> -->
-        <player type="ucb1tuned" name="UCB-Tuned"/>
-        <player type="freqhist" name="Freq-Hist"/>
-        <player type="replyhist" name="Reply Hist"/>
+        <player type="fictitious" name="Fictitious(Det)" config="fictitious_deterministic"/>
+        <player type="noregret" name="NoRegret"/>
+        <player type="ucb1tuned" name="UCB1-Tuned"/>
+        <player type="freqhist" name="FreqHist"/>
+        <player type="replyhist" name="ReplyHist"/>
         <player type="exp3" name="Exp3"/>
         <!-- player type="agent" name="Agent 1" config="configs/Agent_1.xml" -->
         <!--
