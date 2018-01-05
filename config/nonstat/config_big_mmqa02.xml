@@ -176,7 +176,7 @@
     <parameters>
         <enash-exploitation value="0.4" />
         <egreedy-exploration value="0.2" />
-        <shuffle-match-list value="true" />
+        <shuffle-match-list value="false" />
         <scorechart-file value="config/scorechart_fortress.csv" />
         <output-spreadsheet value="score-chart_mmqa02.xls" />
         <output-match-choices value="choices_mmqa02/match-choices-rep_#.csv" />
