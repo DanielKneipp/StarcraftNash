@@ -529,7 +529,7 @@ class Main:
 
             # writes some nice information about progress
             sys.stdout.write(
-                "\r\n%s -vs- %s -- Match #%d: %s - Winner: %s".ljust(60) %
+                "\r%s -vs- %s -- Match #%d: %s - Winner: %s".ljust(60) %
                 (player_a.get_name(), player_b.get_name(), i + 1, match, winner)
             )
             self.res_history.append(winner)
