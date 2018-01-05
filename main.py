@@ -10,6 +10,7 @@ import config
 import random
 import argparse
 import itertools
+import xlsxwriter  # for generating excel
 import result_parser
 import agents.agent_base
 import matplotlib.pyplot as plt
@@ -700,7 +701,7 @@ class Main:
         pass
 
     def generate_excel_results(self):
-        import xlsxwriter
+
 
         excel_filename = self.config.output_spreadsheet  # usr_input['excel']
 

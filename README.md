@@ -10,9 +10,8 @@ Please [read the wiki](https://github.com/h3ct0r/StarcraftNash/wiki/) for a deta
 
 ### Dependencies
 
-The project depends on [NashPy](https://github.com/drvinceknight/Nashpy). To install it, run:
-
-`sudo -H pip2 install nashpy`
+* [NashPy](https://github.com/drvinceknight/Nashpy): `sudo -H pip2 install nashpy`
+* [XlsxWriter](http://xlsxwriter.readthedocs.io): `sudo -H pip2 install XlsxWriter`
 
 ### Example
 (assuming you have cloned the project and are located at project's root directory)
