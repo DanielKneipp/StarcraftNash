@@ -24,9 +24,10 @@
     </choices>
 
 
-    <players>
+    <players>       
         <player type="egreedy" name="e-Greedy" />
         <player type='unique' name="Xelnaga" />
+        <player type='unique' name="CruzBot" />
         <!--
         <player name="Aiur" />
         <player name="Skynet" />
@@ -49,7 +50,7 @@
         <output-spreadsheet value="score-chart.xls" />
         <output-intermediate value="intermediate" />
         <random-seed value="1" />
-        <repetitions value="10" />
+        <repetitions value="5" />
         <match-pool-file value="results_demo/fortress1000.txt" />
         <num-matches value="1000" />
         <round-robin value="true" />

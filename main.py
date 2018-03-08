@@ -122,7 +122,10 @@ class Main:
                 single_result_dict[player_b.get_name()][player_a.get_name()] = b_win_percentage
 
                 # prints the ranking each player has determined
-                self.print_ranking(player_a, player_b)
+		print "\nRanking values:"
+		self.print_ranking(player_a) 
+		self.print_ranking(player_b)
+		print # adds newline
                 
             print  # adds newline
             self.result_list.append(single_result_dict)
@@ -159,30 +162,35 @@ class Main:
             new_bb = AgentSelector.recreate_strategy(bb)
             self.game_matches[i] = (new_aa, new_bb)
     
-    def print_ranking(self, player_a, player_b):
-        flag = 1
-        
-        #select e-greedy
-        if player_a.get_name() == "e-Greedy":
-            e_greedy =  player_a
-        
-        elif player_b.get_name() == "e-Greedy":
-            e_greedy = player_b
-        
-        else:
-            flag = 0
-        
-        #e-greedy selected
-        if flag == 1:
-            #ranking() function
-            score = e_greedy.calculate_scores()
-            
+    def print_ranking(self, player):
+	name = player.get_name()
+	bots = ["Xelnaga", "CruzBot", "NUSBot", "Aiur", "Skynet"]
+	
+	#!Ranking type depends on the name given to the player
+	#Type egreedy
+        if name == "e-Greedy":
+            score = player.calculate_scores()
+ 
             # constructs a list of tuples from the dict
             ranking = [(choice, score) for choice, score in score.iteritems()]
             
             #prints the sorted list
-            print "\nE-Greedy ranking values:"
-            print sorted(ranking, key=lambda x: x[1], reverse=True)
+            print "e-Greedy:" + str(sorted(ranking, key=lambda x: x[1], reverse=True))
+
+	#Type unique	
+	if name in bots:
+            
+	    ranking = []
+	    for bot_name in bots:	
+		if bot_name == name:
+		    value = (bot_name, 1)
+		else:
+		    value = (bot_name, 0)
+		ranking.append(value)
+
+	    print "Unique:" + str(ranking)
+
+		
 
     @staticmethod
     def output_overall_match_result(out_file, overall_players_choices, num_matches, num_repetitions):
