@@ -163,32 +163,35 @@ class Main:
             self.game_matches[i] = (new_aa, new_bb)
     
     def print_ranking(self, player):
-	name = player.get_name()
-	bots = ["Xelnaga", "CruzBot", "NUSBot", "Aiur", "Skynet"]
-	
-	#!Ranking type depends on the name given to the player
-	#Type egreedy
+        name = player.get_name()
+        bots = ["Xelnaga", "CruzBot", "NUSBot", "Aiur", "Skynet"]
+
+        #!Ranking type depends on the name given to the player
+        #Type egreedy
         if name == "e-Greedy":
             score = player.calculate_scores()
- 
+
             # constructs a list of tuples from the dict
             ranking = [(choice, score) for choice, score in score.iteritems()]
-            
+
             #prints the sorted list
             print "e-Greedy:" + str(sorted(ranking, key=lambda x: x[1], reverse=True))
 
-	#Type unique	
-	if name in bots:
-            
-	    ranking = []
-	    for bot_name in bots:	
-		if bot_name == name:
-		    value = (bot_name, 1)
-		else:
-		    value = (bot_name, 0)
-		ranking.append(value)
+        #Type Nash        
 
-	    print "Unique:" + str(ranking)
+        #Type unique	
+        if name in bots:
+
+            ranking = []
+            for bot_name in bots:	
+                if bot_name == name:
+                    value = (bot_name, 1)
+                else:
+                    value = (bot_name, 0)
+                
+                ranking.append(value)
+        
+            print "Unique " + name + ":" + str(ranking)
 
 		
 
