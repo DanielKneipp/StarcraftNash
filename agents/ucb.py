@@ -87,6 +87,32 @@ class UCB1(AgentBase):
 
         return float(choice['sum'])/choice['trials'] + sqrt(2*log(self.history_length()) / choice['trials'])
 
+    def get_name(self):
+        return self.strategy_name
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+    
+        data = self.update()
+        ranking = []
+
+        # constructs a list of tuples from the dict
+        for bot_name, hist_data in data.items():
+            
+            #calculate the ranking value using the UCB1 formula
+            if hist_data['trials'] == 0:
+                ucb_value = maxint
+            else:
+                ucb_value = float(hist_data['sum'])/hist_data['trials'] + sqrt(2*log(self.history_length()) / hist_data['trials'])
+
+            ranking.append((bot_name, ucb_value))
+
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
 
 class UCB1Tuned(UCB1):
     """
@@ -129,6 +155,27 @@ class UCB1Tuned(UCB1):
         squared_average = (float(choice['sum']) / choice['trials']) ** 2
 
         return average_of_squares - squared_average + sqrt(2 * log(self.history_length()) / choice['trials'])
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+    
+        data = self.update()
+        ranking = []
+
+        # constructs a list of tuples from the dict
+        for bot_name, hist_data in data.items():
+            
+            #calculate the ranking value using the UCB1 formula
+            value = self.ucb1_tuned(hist_data)
+            
+            ranking.append((bot_name, value))
+
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
 
 
 
