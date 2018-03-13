@@ -1,4 +1,5 @@
 from agent_base import AgentBase
+from config import Config
 import random_uniform
 
 __author__ = 'Hector Azpurua'
@@ -28,13 +29,12 @@ class Unique(AgentBase):
         Returns the sorted ranking of choices for next bot
         :return:
         """
-        # TODO - change this bot list that was manually made for the
-        # actual list on the database
-        bots = ["Xelnaga", "CruzBot", "NUSBot", "Aiur", "Skynet"]
+
+        bot_list = Config.get_instance().get_bandit_choices()
         
         #Creates ranking list
         ranking = []
-        for bot_name in bots:   
+        for bot_name in bot_list:   
             if bot_name == self.get_name():
                 value = (bot_name, 1)
             else:
