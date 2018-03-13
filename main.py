@@ -121,11 +121,10 @@ class Main:
                 single_result_dict[player_a.get_name()][player_b.get_name()] = a_win_percentage
                 single_result_dict[player_b.get_name()][player_a.get_name()] = b_win_percentage
 
-                # prints the ranking each player has determined
-		print "\nRanking values:"
-		self.print_ranking(player_a) 
-		self.print_ranking(player_b)
-		print # adds newline
+                # prints the ranking each player has determined if the proper function exists
+                print "\nRanking values:"
+                self.print_ranking(player_a)
+                self.print_ranking(player_b)
                 
             print  # adds newline
             self.result_list.append(single_result_dict)
@@ -161,40 +160,16 @@ class Main:
             new_aa = AgentSelector.recreate_strategy(aa)
             new_bb = AgentSelector.recreate_strategy(bb)
             self.game_matches[i] = (new_aa, new_bb)
+
+    def print_ranking(self, player_a):
+        print player_a.get_name() + ":",
+
+        if player_a.ranking():
+            print player_a.ranking()
+        else:
+            print "Ranking function not found"
+
     
-    def print_ranking(self, player):
-        name = player.get_name()
-        bots = ["Xelnaga", "CruzBot", "NUSBot", "Aiur", "Skynet"]
-
-        #!Ranking type depends on the name given to the player
-        #Type egreedy
-        if name == "e-Greedy":
-            score = player.calculate_scores()
-
-            # constructs a list of tuples from the dict
-            ranking = [(choice, score) for choice, score in score.iteritems()]
-
-            #prints the sorted list
-            print "e-Greedy:" + str(sorted(ranking, key=lambda x: x[1], reverse=True))
-
-        #Type Nash        
-
-        #Type unique	
-        if name in bots:
-
-            ranking = []
-            for bot_name in bots:	
-                if bot_name == name:
-                    value = (bot_name, 1)
-                else:
-                    value = (bot_name, 0)
-                
-                ranking.append(value)
-        
-            print "Unique " + name + ":" + str(ranking)
-
-		
-
     @staticmethod
     def output_overall_match_result(out_file, overall_players_choices, num_matches, num_repetitions):
         ratio = 100 / float(num_matches * num_repetitions)

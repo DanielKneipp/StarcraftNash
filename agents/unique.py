@@ -22,3 +22,26 @@ class Unique(AgentBase):
         :return:
         """
         return self.strategy_name
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return:
+        """
+        # TODO - change this bot list that was manually made for the
+        # actual list on the database
+        bots = ["Xelnaga", "CruzBot", "NUSBot", "Aiur", "Skynet"]
+        
+        #Creates ranking list
+        ranking = []
+        for bot_name in bots:   
+            if bot_name == self.get_name():
+                value = (bot_name, 1)
+            else:
+                value = (bot_name, 0)
+            
+            ranking.append(value)
+
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)

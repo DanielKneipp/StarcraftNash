@@ -42,7 +42,7 @@ class EGreedy(AgentBase):
         """
         Chooses a random strategy (exploration) with probability epsilon
         and chooses the best known strategy with probability 1-epsilon
-        :return: str
+        :return:
         """
 
         # chooses randomly when epsilon is matched and in first match
@@ -57,6 +57,10 @@ class EGreedy(AgentBase):
         return best_strategy
 
     def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
         scores = self.calculate_scores()
 
         # constructs a list of tuples from the dict
