@@ -123,3 +123,17 @@ class Exp3(AgentBase):
         self.weights[chosen_arm] += mixed_rwd
 
 
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        scores = self.weights
+
+        # constructs a list of tuples from the dict
+        ranking = [(choice, score) for choice, score in scores.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
+
+

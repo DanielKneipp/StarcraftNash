@@ -79,3 +79,14 @@ class NoRegret(AgentBase):
 
     def set_id(self, s_id):
         self.s_id = s_id
+    
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        # constructs a list of tuples from the dict
+        ranking = [(choice, score * -1) for choice, score in self.regrets.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)

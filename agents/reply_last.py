@@ -33,6 +33,20 @@ class PriorKnowledgeReplyLast(AgentBase):
         # responds with opponent's nemesis, i.e the one that makes it perform worst
         return min(self.score_chart[opponent_choice], key=self.score_chart[opponent_choice].get)
 
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        #create temporary dict
+        ranking = {choice: 0 for choice in self.bot_list}
+        ranking[self.get_next_bot()] = 1 #change value of the next choice
+
+        #create list of tuples from the dict
+        ranking = [(choice, value) for choice, value in ranking.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
 
 class NoPriorReplyLast(AgentBase):
     """
@@ -59,3 +73,18 @@ class NoPriorReplyLast(AgentBase):
 
         # responds with opponent's nemesis, i.e the one that makes it perform worst
         return min(win_count[opponent_choice], key=win_count[opponent_choice].get)
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        #create temporary dict
+        ranking = {choice: 0 for choice in self.bot_list}
+        ranking[self.get_next_bot()] = 1 #change value of the next choice
+
+        #create list of tuples from the dict
+        ranking = [(choice, value) for choice, value in ranking.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)

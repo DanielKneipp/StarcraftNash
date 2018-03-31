@@ -21,3 +21,21 @@ class Rotate(AgentBase):
         :return:
         """
         return self.bot_list[len(self.match_list) % len(self.bot_list)]
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+
+        ranking = []
+
+        for bot in self.bot_list:
+            if bot == self.bot_list[len(self.match_list) % len(self.bot_list)]:
+                ranking.append((bot, 1))
+            else:
+                ranking.append((bot, 0))
+
+
+        # returns the sorted list
+        return ranking

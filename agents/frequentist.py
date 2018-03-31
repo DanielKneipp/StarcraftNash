@@ -55,6 +55,33 @@ class Frequentist(AgentBase):
 
         return max(opponent_counter, key=opponent_counter.get)
 
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        
+        #counts the number of times each bot was selected by the opponent
+        opponent_counter = {choice: 0 for choice in self.bot_list}
+
+        for match_index in range(self.history_length()):
+            opponent_counter[self.opponent_choice(match_index)] += 1
+
+        #constructs a temporary dict with the number of times each nemesis appears
+        ranking = {choice: 0 for choice in self.bot_list}
+
+        for bot in self.bot_list:
+            # calculate the bot nemesis (i.e. the one that makes it perform worst)
+            nemesis = min(self.score_chart[bot], key=self.score_chart[bot].get)
+            ranking[nemesis] += opponent_counter[bot]
+
+        #transforms the dict on a list of tuples
+        ranking = [(choice, score) for choice, score in ranking.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
+
+
 
 class HistoryFrequentist(Frequentist):
     """
@@ -84,4 +111,33 @@ class HistoryFrequentist(Frequentist):
 
         # responds with opponent's nemesis, i.e the one that makes it perform worst
         return min(win_count[most_common_opponent], key=win_count[most_common_opponent].get)
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        
+        #counts the number of times each bot was selected by the opponent
+        opponent_counter = {choice: 0 for choice in self.bot_list}
+
+        for match_index in range(self.history_length()):
+            opponent_counter[self.opponent_choice(match_index)] += 1
+
+        #constructs a temporary dict with the number of times each nemesis appears
+        ranking = {choice: 0 for choice in self.bot_list}
+
+        win_count = self.calculate_score_table()
+
+        for bot in self.bot_list:
+            # calculate the bot nemesis (i.e. the one that makes it perform worst)
+            nemesis = min(win_count[bot], key=win_count[bot].get)
+            ranking[nemesis] += opponent_counter[bot]
+
+        #transforms the dict on a list of tuples
+        ranking = [(choice, score) for choice, score in ranking.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
+
 

@@ -34,3 +34,11 @@ class RandomUniform(AgentBase):
     def get_next_bot(self):
         bot = random.choice(self.bot_list)
         return bot
+
+    def ranking(self):
+        """
+        Returns the most frequent choice by the opponent
+        :return:
+        """
+        return {bot: 1.0/len(self.bot_list) for bot in self.bot_list}
+
