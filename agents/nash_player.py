@@ -60,3 +60,15 @@ class Nash(AgentBase):
         print >> sys.stderr, self.probabilities
 
         return None
+
+    def ranking(self):
+        """
+        Returns the sorted ranking of choices for next bot
+        :return: list
+        """
+        
+        # constructs a list of tuples from the probabilities attribute
+        ranking = [(key, value) for key, value in self.probabilities.iteritems()]
+
+        # returns the sorted list
+        return sorted(ranking, key=lambda x: x[1], reverse=True)
