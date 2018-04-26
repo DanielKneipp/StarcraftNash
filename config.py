@@ -52,10 +52,11 @@ class Config(object):
     SCORECHART_FILE = 'scorechart-file'
     FICTITIOUS_INITIAL_WEIGHTS = 'fictitious-initial-weights'
     FICTITIOUS_RUNNING_WEIGHTS = 'fictitious-running-weights'
-    INITIAL_REGRETS = 'noregret-initial-regrets',
+    INITIAL_REGRETS = 'noregret-initial-regrets'
     E_GREEDY_EXPLORATION = 'egreedy-exploration'
     E_NASH_EXPLOITATION = 'enash-exploitation'
     EXP3_GAMMA = 'exp3-gamma'
+    EXP3_GAMMA = 'exp3-alpha'
     SHUFFLE_MATCH_LIST = 'shuffle-match-list'
     RANDOM_SEED = 'random-seed'
     REPETITIONS = 'repetitions'
@@ -97,6 +98,7 @@ class Config(object):
             self.E_GREEDY_EXPLORATION: .1,
             self.E_NASH_EXPLOITATION: .1,
             self.EXP3_GAMMA: .1,
+            self.EXP3_ALPHA: 1,
             self.VERBOSE: True,
             self.SHUFFLE_MATCH_LIST: False,
             self.RANDOM_SEED: None,
@@ -119,6 +121,7 @@ class Config(object):
             self.E_GREEDY_EXPLORATION: default_parser(float),
             self.E_NASH_EXPLOITATION: default_parser(float),
             self.EXP3_GAMMA: default_parser(float),
+            self.EXP3_ALPHA: default_parser(float),
             self.VERBOSE: str_to_bool,
             self.SHUFFLE_MATCH_LIST: str_to_bool,
             self.RANDOM_SEED: default_parser(int),
