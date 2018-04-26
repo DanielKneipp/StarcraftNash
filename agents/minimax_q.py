@@ -54,9 +54,9 @@ class MiniMaxQ(AgentBase):
         choice = self.nash_choice()
 
         # If it is the last round, save the qmatrix
-        if self.history_length() == (self.config.data[Config.NUM_MATCHES] - 1):
-            self.save_qmatrix_str('qmatrix_info/last_qmatrix_' + self.hash_str + '.txt')
-            self.dump_qmatrices('qmatrix_info/nash_problematic_qmatrices_' + self.hash_str + '.pkl')
+        # if self.history_length() == (self.config.data[Config.NUM_MATCHES] - 1):
+            # self.save_qmatrix_str('qmatrix_info/last_qmatrix_' + self.hash_str + '.txt')
+            # self.dump_qmatrices('qmatrix_info/nash_problematic_qmatrices_' + self.hash_str + '.pkl')
 
         return choice
 

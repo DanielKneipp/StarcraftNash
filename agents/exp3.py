@@ -45,7 +45,7 @@ class Exp3(AgentBase):
         self.bot_list = Config.get_instance().get_bandit_choices()
 
         self.gamma = Config.get_instance().exp3_gamma
-        self.alpha = 1
+        self.alpha = Config.get_instance().exp3_alpha
         #self.weights = {choice: 1.0 for choice in self.bot_list}
         self.weights = {choice: 0.0 for choice in self.bot_list}
 

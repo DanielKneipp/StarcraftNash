@@ -1,0 +1,48 @@
+<config>
+    <choices>
+        <choice name="Xelnaga" nashprob=".41975" />
+        <choice name="CruzBot" nashprob=".28395" />
+        <choice name="NUSBot" nashprob="0" />
+        <choice name="Aiur" nashprob="0" />
+        <choice name="Skynet" nashprob=".2963" />
+    </choices>
+
+    <players>
+        <player type="nash" name="Nash"/>
+        <player type="enash" name="e-Nash" />
+        <player type="frequentist" name="Frequentist"/>
+        <player type="replyscore" name="Reply-Last"/>
+        <player type="egreedy" name="e-Greedy" />
+        <player type='unique' name="Xelnaga" />
+        <player type='unique' name="Skynet" />
+        <player type="minimaxq" name="MiniMaxQ" config="minimaxq"/>
+        <player type="noregret" name="NoRegret"/>
+        <player type="ucb1tuned" name="UCB1-Tuned"/>
+        <player type="freqhist" name="FreqHist"/>
+        <player type="replyhist" name="ReplyHist"/>
+        <player type="exp3" name="Exp3"/>
+    </players>
+
+    <minimaxq>
+        <alpha parser="float" value="#MINIMAXQALPHA"/>
+    </minimaxq>
+
+    <parameters>
+        <enash-exploitation value="#ENASHE" />
+        <egreedy-exploration value="#EGREEDYE" />
+        <exp3-gamma value="#EXP3GAMMA" />
+        <exp3-alpha value="#EXP3ALPHA" />
+        <shuffle-match-list value="#SHUFFLE" />
+        <scorechart-file value="config/scorechart_fortress.csv" />
+        <output-spreadsheet value="score_charts/#SCORECHART_FILE" />
+        <output-match-choices value="choices/#CHOICES_FOLDER/match-choices-rep_#.csv" />
+        <output-intermediate value="intermediates/#ITERMEDIATE_FOLDER" />
+        <random-seed value="1" />
+        <repetitions value="30" />
+        <match-pool-file value="#POOL" />
+        <num-matches value="1000" />
+        <round-robin value="true" />
+        <verbose value="true" />
+        <plot value="false" />
+    </parameters>
+</config>
