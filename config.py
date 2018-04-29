@@ -56,7 +56,7 @@ class Config(object):
     E_GREEDY_EXPLORATION = 'egreedy-exploration'
     E_NASH_EXPLOITATION = 'enash-exploitation'
     EXP3_GAMMA = 'exp3-gamma'
-    EXP3_GAMMA = 'exp3-alpha'
+    EXP3_ALPHA = 'exp3-alpha'
     SHUFFLE_MATCH_LIST = 'shuffle-match-list'
     RANDOM_SEED = 'random-seed'
     REPETITIONS = 'repetitions'
